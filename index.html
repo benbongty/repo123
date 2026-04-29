@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bánh Quy Khô Gà | Phiên Bản Hoàn Hảo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --black: #000; --white: #fff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; width: 100%; }
+
+        /* Banner & Header */
+        .alert-banner { background: var(--black); color: var(--white); text-align: center; padding: 10px; font-size: 11px; letter-spacing: 1px; width: 100%; }
+        header { padding: 40px 15px 20px; text-align: center; }
+        h1 { font-size: clamp(24px, 8vw, 32px); text-transform: uppercase; letter-spacing: 2px; }
+        h1 span { color: var(--gold); }
+
+        /* Grid sản phẩm - Viết cứng CSS để không bao giờ mất */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(5, 1fr); } }
+
+        /* Card thiết kế */
+        .card {
+            border: 1px solid #f0f0f0; border-radius: 12px; padding: 15px;
+            text-align: center; display: flex; flex-direction: column;
+            justify-content: space-between; background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); min-height: 220px;
+        }
+        .card.mystic { background: #fffdf5; border: 1.5px dashed var(--gold); }
+        .card-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .price { color: var(--gold); font-weight: 700; margin-bottom: 12px; font-size: 13px; }
+
+        /* Nút Mua Ngay */
+        .btn-wrap { position: relative; height: 40px; width: 100%; }
+        .buy-btn {
+            position: absolute; width: 100%; height: 100%; left: 0; top: 0;
+            background: var(--black); color: var(--gold); border: none;
+            border-radius: 20px; font-weight: 700; font-size: 12px;
+            cursor: pointer; transition: transform 0.15s ease-out; z-index: 10;
+        }
+
+        /* Footer */
+        footer { background: var(--black); color: #666; padding: 40px 20px; text-align: center; font-size: 12px; margin-top: 50px; }
+        #counter { color: var(--gold); font-weight: bold; }
+
+        /* --- OVERLAYS --- */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
+        
+        /* Daytonia Rainbow (Đã sửa theo yêu cầu) */
+        #glitchOverlay { background: #000; flex-direction: column; }
+        .daytonia-text { 
+            font-family: 'Courier Prime', monospace; 
+            font-size: clamp(1.5rem, 8vw, 3.5rem); 
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowScroll 3s linear infinite;
+        }
+        @keyframes rainbowScroll { to { background-position: 200% center; } }
+        .marquee { width: 100%; overflow: hidden; white-space: nowrap; margin-top: 20px; color: #555; font-family: monospace; }
+        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        /* Blood & Modals */
+        #bloodOverlay { background: #8b0000; color: #fff; font-size: 28px; font-weight: 900; text-align: center; animation: blink 0.1s infinite; text-transform: uppercase; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        #peppaModal { background: rgba(0,0,0,0.9); }
+        .modal-box { background: #fff; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; }
+        #dictModal { background: #fff; font-family: 'Courier Prime', monospace; color: #000; text-align: left; }
+        .dict-content { max-width: 500px; border-left: 5px solid #000; padding-left: 20px; }
+        #storyOverlay { background: rgba(0,0,0,0.85); color: #fff; font-style: italic; font-size: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="alert-banner">Đây chỉ là 1 trang web j4f, vui lòng đừng chửi thg làm web, tội cháu nó</div>
+
+    <header>
+        <h1>Bánh Quy <span>Khô Gà</span></h1>
+    </header>
+
+    <div class="product-grid" id="grid">
+        <div class="card"><div class="card-title">Bánh quy Khô gà</div><div class="price">1.000.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy Socola</div><div class="price">60.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy 67</div><div class="price">67.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy Đường tàu</div><div class="price">80.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy 30/4</div><div class="price">30.400 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy 20 ngón</div><div class="price">200.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy Chay</div><div class="price">45.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy 7 màu</div><div class="price">77.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="peppa">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy Chồng chất</div><div class="price">99.000 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="dark">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy CGCC</div><div class="price">FREE</div><div class="btn-wrap"><button class="buy-btn" data-t="fb">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Editional Opposite</div><div class="price">???</div><div class="btn-wrap"><button class="buy-btn" data-t="dict">Mua ngay</button></div></div>
+        <div class="card"><div class="card-title">Bánh quy F</div><div class="price">0 VNĐ</div><div class="btn-wrap"><button class="buy-btn" data-t="f">Mua ngay</button></div></div>
+        
+        <div class="card mystic"><div class="card-title">Thanh Samurai</div><div class="price">Vật phẩm</div><div class="btn-wrap"><button class="buy-btn" data-t="story" data-m="Nó vốn không được dùng để diệt ma cà rồng">Mua ngay</button></div></div>
+        <div class="card mystic"><div class="card-title">Cái xẻng</div><div class="price">Vật phẩm</div><div class="btn-wrap"><button class="buy-btn" data-t="story" data-m="Dụng cụ mà ma cà rồng hay dùng để an táng">Mua ngay</button></div></div>
+        <div class="card mystic"><div class="card-title">Bức ảnh</div><div class="price">Vật phẩm</div><div class="btn-wrap"><button class="buy-btn" data-t="story" data-m="Anh nhớ em">Mua ngay</button></div></div>
+        <div class="card mystic" id="torchCard"><div class="card-title">Đuốc</div><div class="price">Vật phẩm</div><div class="btn-wrap"><button class="buy-btn" data-t="torch">Mua ngay</button></div></div>
+    </div>
+
+    <footer>
+        <p>© 2026 www.banhquykhoga.com</p>
+        <p>Đã có <span id="counter">0</span> người bị nhân vật Bánh Quy lừa.</p>
+    </footer>
+
+    <div id="glitchOverlay" class="overlay">
+        <div class="daytonia-text">D@yT0ni@ Is Coming</div>
+        <div class="marquee"><div style="animation: scroll 8s linear infinite;">-.. .- -.-- - --- -. .. .- / 逃げろ 逃げろ 呪い</div></div>
+    </div>
+    <div id="bloodOverlay" class="overlay">ĐỪNG HỎI VỀ NÓ, CON NGƯỜI</div>
+    <div id="peppaModal" class="overlay"><div class="modal-box"><h2 style="color:var(--gold);">Oink Oink! 🐷</h2><p>Bánh quy đã bị ăn sạch rồi!</p><button onclick="closeAll()" style="margin-top:20px; padding:10px 20px;">Đóng</button></div></div>
+    <div id="dictModal" class="overlay"><div class="dict-content" id="dictText"></div></div>
+    <div id="storyOverlay" class="overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("%cNote: pls buy her some red bl_d", "color: red; font-size: 20px; font-weight: bold;");
+            document.getElementById('counter').innerText = Math.floor(Math.random() * 4001) + 1000;
+
+            const buttons = document.querySelectorAll('.buy-btn');
+            const dictData = [
+                "<h2>ma cà rồng (n)</h2><p>Sinh vật hút máu người sống để tồn tại.</p>",
+                "<h2>edo (n)</h2><p>Thời kỳ bóng tối và sự biệt lập tại Nhật Bản.</p>",
+                "<h2>oni (n)</h2><p>Loài quỷ tàn ác luôn đói khát trong truyền thuyết.</p>",
+                "<h2>meireki (n)</h2><p>Trận đại hỏa hoạn thiêu rụi Edo năm 1657.</p>"
+            ];
+            let dictClicks = 0;
+
+            buttons.forEach(btn => {
+                let jumps = 0;
+                const maxJumps = 3;
+
+                const move = (e) => {
+                    if (jumps < maxJumps) {
+                        const x = (Math.random() - 0.5) * 120;
+                        const y = (Math.random() - 0.5) * 80;
+                        btn.style.transform = `translate(${x}px, ${y}px)`;
+                        jumps++;
+                        if (e.type === 'touchstart') e.preventDefault();
+                    }
+                };
+
+                btn.addEventListener('mouseover', move);
+                btn.addEventListener('touchstart', move, {passive: false});
+
+                btn.addEventListener('click', () => {
+                    if (jumps < maxJumps) return;
+                    btn.style.transform = 'translate(0,0)';
+                    jumps = 0;
+                    
+                    const type = btn.getAttribute('data-t');
+                    const msg = btn.getAttribute('data-m');
+
+                    if (type === 'fb') window.open("https://www.facebook.com/share/1GUNVFEetq/", "_blank");
+                    else if (type === 'f') alert("Gợi ý: F11, F12");
+                    else if (type === 'dark') show('glitchOverlay', 10000);
+                    else if (type === 'torch') {
+                        show('bloodOverlay', 10000, () => {
+                            const card = document.getElementById('torchCard');
+                            card.querySelector('.card-title').innerText = "Bánh quy tro tàn";
+                            card.querySelector('.price').innerText = "Tàn tích";
+                        });
+                    }
+                    else if (type === 'story') {
+                        const s = document.getElementById('storyOverlay');
+                        s.innerText = msg;
+                        show('storyOverlay', 3000);
+                    }
+                    else if (type === 'dict') {
+                        dictClicks++;
+                        if (dictClicks >= 5) {
+                            dictClicks = 0;
+                            document.getElementById('dictText').innerHTML = dictData[Math.floor(Math.random()*dictData.length)];
+                            show('dictModal', 6000);
+                        } else alert(`Bấm thêm ${5 - dictClicks} lần nữa...`);
+                    }
+                    else show('peppaModal');
+                });
+            });
+
+            function show(id, time, cb) {
+                const el = document.getElementById(id);
+                el.style.display = 'flex';
+                if (time) setTimeout(() => { el.style.display = 'none'; if(cb) cb(); }, time);
+            }
+        });
+
+        function closeAll() { document.querySelectorAll('.overlay').forEach(o => o.style.display = 'none'); }
+    </script>
+</body>
+</html>
